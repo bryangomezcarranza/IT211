@@ -1,4 +1,4 @@
-var firstName = "Bryan";
-var lastName = "Gomez";
-var yearsOfStudy = 3;
-var goal = "hopefully get a full time position as a Software Engineer with my dream company";
+let firstName = "Bryan";
+let lastName = "Gomez";
+let yearsOfStudy = 3;
+let goal = "secure an internship at a company where I can expand my knowledge and gain valuable experience";
