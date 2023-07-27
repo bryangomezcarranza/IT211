@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Card Dealing Program</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      color: blueviolet;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: powderblue;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 10px;
+    }
+
+    button:hover {
+      background-color: #203a8e;
+    }
+
+    #hand {
+      margin-top: 20px;
+    }
+
+    #hand p {
+      margin: 5px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Card Dealing Program</h1>
+  <button onclick="dealHand()">Deal Hand</button>
+  <div id="hand"></div>
+
+  <script>
+    // Define the Card object with 'value' and 'suit' properties.
+    function Card(value, suit) {
+      this.value = value;
+      this.suit = suit;
+    }
+
+    // Create an array of 52 Card objects to represent all unique cards in a deck.
+    const suits = ['Spades', 'Hearts', 'Diamonds', 'Clubs'];
+    const values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'King', 'Ace'];
+    let deck = [];
+
+    for (let suit of suits) {
+      for (let value of values) {
+        deck.push(new Card(value, suit));
+      }
+    }
+
+    // Define a function that randomly selects 5 cards from the deck.
+    function dealHand() {
+      // Clear the currently-displayed hand.
+      document.getElementById('hand').innerHTML = '';
+
+      // Shuffle the deck to randomize the card order.
+      deck.sort(() => Math.random() - 0.5);
+
+      // Select the first 5 cards from the shuffled deck.
+      let hand = deck.slice(0, 5);
+
+      // Display the information about the selected cards on the HTML page.
+      for (let card of hand) {
+        let cardName = card.value === 'Ace' || card.value === 'King' || card.value === 'Queen' || card.value === 'Jack' ? card.value : card.value + ' of';
+        let cardInfo = document.createElement('p');
+        cardInfo.textContent = `${cardName} ${card.suit}`;
+        document.getElementById('hand').appendChild(cardInfo);
+      }
+    }
+  </script>
+</body>
+</html>
