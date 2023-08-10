@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <style>
+        .over {
+            background-color: orange;
+        }
+        .selected {
+            background-color: green;
+        }
+    </style>
+</head>
+<body>
+    <div id="buttons"></div>
+    <table border='1'>
+        <thead>
+            <tr>
+                <th>name</th>
+                <th>role</th>
+                <th>house</th>
+                <th>gender</th>
+                <th>alignment</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Table rows will be inserted here -->
+        </tbody>
+    </table>
+    <button id="reset">reset</button>
+
+    <script>
+        var characters = [
+            // Characters data here...
+        ];
+
+        $(document).ready(function(){
+            var uniqueHouses = [];
+            var $tableBody = $('tbody');
+            var $resetButton = $('#reset');
+
+            // Populate the table and collect unique 'house' values
+            characters.forEach(function(character) {
+                var row = '<tr>' +
+                    '<td>' + character.name + '</td>' +
+                    '<td>' + character.role + '</td>' +
+                    '<td>' + character.house + '</td>' +
+                    '<td>' + character.gender + '</td>' +
+                    '<td>' + character.alignment + '</td>' +
+                '</tr>';
+                $tableBody.append(row);
+
+                if (!uniqueHouses.includes(character.house)) {
+                    uniqueHouses.push(character.house);
+                }
+            });
+
+            // Create buttons for each unique 'house' value
+            var $buttonsDiv = $('#buttons');
+            uniqueHouses.forEach(function(house) {
+                var $button = $('<button>' + house + '</button>');
+                $button.click(function() {
+                    // Hide all rows and show rows matching the selected 'house'
+                    $tableBody.find('tr').hide();
+                    $tableBody.find('td:nth-child(3):contains("' + house + '")').parent().show();
+                });
+                $buttonsDiv.append($button);
+            });
+
+            // Click handler for the reset button
+            $resetButton.click(function() {
+                $tableBody.find('tr').show();
+            });
+        });
+    </script>
+</body>
+</html>
